@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
-# Init script for managing the manage_my_process daemon
+# 101-manage_my_process: Init script to manage the manage_my_process daemon
+# Usage: 101-manage_my_process {start|stop|restart}
 
-PROCESS_SCRIPT="./manage_my_process"  # Replace with the full path if required
+PROCESS_SCRIPT="./manage_my_process"  # Full path if required
 PID_FILE="/var/run/my_process.pid"
 
 case "$1" in
     start)
-        if [ -f "$PID_FILE" ]; then
+        if [ -f "$PID_FILE" ]
+        then
             echo "manage_my_process is already running"
         else
             nohup "$PROCESS_SCRIPT" &>/dev/null &
@@ -16,7 +18,8 @@ case "$1" in
         ;;
     
     stop)
-        if [ -f "$PID_FILE" ]; then
+        if [ -f "$PID_FILE" ]
+        then
             kill "$(cat "$PID_FILE")" && rm -f "$PID_FILE"
             echo "manage_my_process stopped"
         else
@@ -25,7 +28,8 @@ case "$1" in
         ;;
     
     restart)
-        if [ -f "$PID_FILE" ]; then
+        if [ -f "$PID_FILE" ]
+        then
             kill "$(cat "$PID_FILE")" && rm -f "$PID_FILE"
         fi
         nohup "$PROCESS_SCRIPT" &>/dev/null &
