@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# A script to change localhost addresses
+
+cp /etc/hosts ~/hosts.new
+echo "127.0.0.1 	localhost" > ~/hosts.new
+echo "157.240.11.35	facebook.com" >> ~/hosts.new
+cp -f ~/hosts.new /etc/hosts
